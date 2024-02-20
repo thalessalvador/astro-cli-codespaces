@@ -1,49 +1,45 @@
-Overview
-========
+## An Astro project to run within GitHub Codespaces
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+Welcome to [Astronomer](astronomer.io)! :rocket:
 
-Project Contents
-================
+This repository is an Astro project, a local [Apache Airflow](https://airflow.apache.org/) project created with the OSS [Astro CLI](https://docs.astronomer.io/astro/cli/overview), that you can run within GitHub codespaces. You can fork this repository to develop your own Apache Airflow projects without the need for any local setup.
 
-Your Astro project contains the following files and folders:
+### Setting up
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes two example DAGs:
-    - `example_dag_basic`: This DAG shows a simple ETL data pipeline example with three TaskFlow API tasks that run daily.
-    - `example_dag_advanced`: This advanced DAG showcases a variety of Airflow features like branching, Jinja templates, task groups and several Airflow operators.
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+Run this Airflow project without installing anything locally.
 
-Deploy Your Project Locally
-===========================
+1. Fork this repository.
+2. Create a new GitHub codespaces project on your fork by clicking **...** and **New with options**. Make sure it uses at least 4 cores!
 
-1. Start Airflow on your local machine by running 'astro dev start'.
+    ![Fork repo and create a codespaces project](src/fork_codespaces.png.png)
 
-This command will spin up 4 Docker containers on your machine, each for a different Airflow component:
+    ![Ensure codespaces uses at least 4 cores](src/ensure_4_cores.png)
 
-- Postgres: Airflow's Metadata Database
-- Webserver: The Airflow component responsible for rendering the Airflow UI
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+3. Wait for the codespaces project to start. Once it has started, open a new terminal and run the following command:
 
-2. Verify that all 4 Docker containers were created by running 'docker ps'.
+    ```bash
+    astro dev start
+    ```
 
-Note: Running 'astro dev start' will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432. If you already have either of those ports allocated, you can either [stop your existing Docker containers or change the port](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#ports-are-not-available).
+4. Once the Airflow project has started access the Airflow UI by clicking on the **Ports** tab and opening the forward URL for port 8080.
 
-3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with 'admin' for both your Username and Password.
+    ![Open Airflow UI URL Codespaces](src/open_ui.png)
 
-You should also be able to access your Postgres Database at 'localhost:5432/postgres'.
+5. Log in to the Airflow UI using the credentials `admin` and `admin`.
 
-Deploy Your Project to Astronomer
-=================================
+    ![Log in to Airflow UI](src/login.png)
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://docs.astronomer.io/cloud/deploy-code/
+6. You can now start developing your Airflow project within GitHub codespaces! Run DAGs by toggling them on in the Airflow UI and clicking the Run arrow. There is one example DAG in the `dags` folder that you can run out of the box.
 
-Contact
-=======
+    ![Run DAGs in Airflow UI](src/run_dags.png)
 
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+
+## Resources
+
+- [ask.astronomer.io](ask.astronomer.io) - Airflow + Astro knowledgeable chat application (free, OSS)
+- [registry.astronomer.io](registry.astronomer.io)  - All you need to know about modules and providers (free)
+- Cloud IDE - Notebook-style DAG writing, with AI✨ (free trial: [astronomer.io/try-astro](https://www.astronomer.io/try-astro))
+- [Astro CLI Docs](https://docs.astronomer.io/astro/cli/overview) - The easiest way to run Airflow locally (free, OSS)
+- [Astronomer Learn](https://docs.astronomer.io/learn) - Many Airflow guides and tutorials (free)
+- [Astronomer Events](https://astronomer.io/events) - Add to your calendar to never miss an event/webinar (free)
+- [Airflow Slack](apache-airflow-slack.herokuapp.com) - The best place to ask Airflow questions (free)

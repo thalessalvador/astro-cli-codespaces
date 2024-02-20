@@ -5,6 +5,5 @@
           "version": "v1.23.0"
         }
     },
-    "postCreateCommand": "bash -i -c 'bash ./.devcontainer/post_creation_script.sh'",
-    "forwardPorts": [8080, 8501]
+    "forwardPorts": [8080]
   }

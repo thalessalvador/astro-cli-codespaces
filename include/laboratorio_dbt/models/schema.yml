@@ -1,0 +1,204 @@
+sources:
+  - name: staging
+    tables:
+      - name: disponibilidade_usina_2025_06
+        columns:
+          - name: _airbyte_raw_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            data_type: timestamp_tz
+          - name: _airbyte_meta
+            data_type: variant
+          - name: _airbyte_generation_id
+            data_type: number
+          - name: ceg
+            data_type: varchar
+          - name: id_ons
+            data_type: varchar
+          - name: id_estado
+            data_type: varchar
+          - name: nom_usina
+            data_type: varchar
+          - name: nom_estado
+            data_type: varchar
+          - name: din_instante
+            data_type: varchar
+          - name: id_tipousina
+            data_type: varchar
+          - name: id_subsistema
+            data_type: varchar
+          - name: nom_subsistema
+            data_type: varchar
+          - name: nom_tipocombustivel
+            data_type: varchar
+          - name: val_dispoperacional
+            data_type: float
+          - name: val_dispsincronizada
+            data_type: float
+          - name: val_potenciainstalada
+            data_type: float
+
+      - name: disponibilidade_usina_2025_07
+        columns:
+          - name: _airbyte_raw_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            data_type: timestamp_tz
+          - name: _airbyte_meta
+            data_type: variant
+          - name: _airbyte_generation_id
+            data_type: number
+          - name: ceg
+            data_type: varchar
+          - name: id_ons
+            data_type: varchar
+          - name: id_estado
+            data_type: varchar
+          - name: nom_usina
+            data_type: varchar
+          - name: nom_estado
+            data_type: varchar
+          - name: din_instante
+            data_type: varchar
+          - name: id_tipousina
+            data_type: varchar
+          - name: id_subsistema
+            data_type: varchar
+          - name: nom_subsistema
+            data_type: varchar
+          - name: nom_tipocombustivel
+            data_type: varchar
+          - name: val_dispoperacional
+            data_type: float
+          - name: val_dispsincronizada
+            data_type: float
+          - name: val_potenciainstalada
+            data_type: float
+
+      - name: disponibilidade_usina_2025_08
+        columns:
+          - name: _airbyte_raw_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            data_type: timestamp_tz
+          - name: _airbyte_meta
+            data_type: variant
+          - name: _airbyte_generation_id
+            data_type: number
+          - name: ceg
+            data_type: varchar
+          - name: id_ons
+            data_type: varchar
+          - name: id_estado
+            data_type: varchar
+          - name: nom_usina
+            data_type: varchar
+          - name: nom_estado
+            data_type: varchar
+          - name: din_instante
+            data_type: varchar
+          - name: id_tipousina
+            data_type: varchar
+          - name: id_subsistema
+            data_type: varchar
+          - name: nom_subsistema
+            data_type: varchar
+          - name: nom_tipocombustivel
+            data_type: varchar
+          - name: val_dispoperacional
+            data_type: float
+          - name: val_dispsincronizada
+            data_type: float
+          - name: val_potenciainstalada
+            data_type: float
+
+      - name: disponibilidade_usina_2025_09
+        columns:
+          - name: _airbyte_raw_id
+            data_type: varchar
+          - name: _airbyte_extracted_at
+            data_type: timestamp_tz
+          - name: _airbyte_meta
+            data_type: variant
+          - name: _airbyte_generation_id
+            data_type: number
+          - name: ceg
+            data_type: varchar
+          - name: id_ons
+            data_type: varchar
+          - name: id_estado
+            data_type: varchar
+          - name: nom_usina
+            data_type: varchar
+          - name: nom_estado
+            data_type: varchar
+          - name: din_instante
+            data_type: varchar
+          - name: id_tipousina
+            data_type: varchar
+          - name: id_subsistema
+            data_type: varchar
+          - name: nom_subsistema
+            data_type: varchar
+          - name: nom_tipocombustivel
+            data_type: varchar
+          - name: val_dispoperacional
+            data_type: float
+          - name: val_dispsincronizada
+            data_type: float
+          - name: val_potenciainstalada
+            data_type: float
+
+models:
+  - name: stg_usina_disp
+    columns:
+      - name: instante
+        tests: [not_null]
+      - name: id_subsistema
+        tests: [not_null]
+
+  - name: dim_usina
+    columns:
+      - name: id_dim_usina
+        tests: [unique, not_null]
+      - name: nom_usina
+        tests: [not_null]
+
+  - name: dim_localidade
+    columns:
+      - name: id_dim_localidade
+        tests: [unique, not_null]
+      - name: nom_subsistema
+        tests: [not_null]
+      - name: nom_estado
+        tests: [not_null]
+
+  - name: dim_tempo
+    columns:
+      - name: id_dim_tempo
+        tests: [unique, not_null]
+      - name: instante
+        tests: [unique, not_null]
+
+  - name: fact_disponibilidade
+    columns:
+      - name: id_dim_usina
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_usina')
+              field: id_dim_usina
+
+      - name: id_dim_localidade
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_localidade')
+              field: id_dim_localidade
+
+      - name: id_dim_tempo
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_tempo')
+              field: id_dim_tempo

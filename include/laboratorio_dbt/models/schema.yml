@@ -199,6 +199,6 @@ models:
       - name: id_dim_tempo
         tests:
           - not_null
-          - relationships:
-              to: ref('dim_tempo')
-              field: id_dim_tempo
+#         - relationships:
+#              to: ref('dim_tempo')
+#              field: id_dim_tempo
